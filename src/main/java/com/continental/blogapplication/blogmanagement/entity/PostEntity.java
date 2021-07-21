@@ -33,11 +33,4 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UsersEntity usersEntity;
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private Instant createdAt;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private Instant updatedAt;
 }

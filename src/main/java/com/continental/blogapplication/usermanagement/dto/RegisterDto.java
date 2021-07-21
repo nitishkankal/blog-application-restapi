@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,3 +19,4 @@ public class RegisterDto {
     private String lastName;
     private String phone;
 }
+
