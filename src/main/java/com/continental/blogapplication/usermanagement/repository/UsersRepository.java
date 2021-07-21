@@ -10,13 +10,13 @@ import java.util.Optional;
 
 @Repository
 public interface UsersRepository extends JpaRepository<UsersEntity, Integer>, JpaSpecificationExecutor<UsersEntity> {
-    Optional<UsersEntity> getByUsername(@NotBlank String username);
+    Optional<UsersEntity> findByUsername(@NotBlank String username);
 
-    Optional<UsersEntity> getByEmail(@NotBlank String email);
+    Optional<UsersEntity> findByEmail(@NotBlank String email);
 
-    Boolean isUserExistbyUsername(@NotBlank String username);
+    Boolean existsByUsername(@NotBlank String username);
 
-    Boolean isUserExistbyEmail(@NotBlank String email);
+    Boolean existsByEmail(@NotBlank String email);
 
     Optional<UsersEntity> getByUsernameOrEmail(String username, String email);
 
