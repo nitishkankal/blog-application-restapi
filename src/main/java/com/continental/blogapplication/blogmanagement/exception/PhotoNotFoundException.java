@@ -1,4 +1,4 @@
-package com.continental.blogapplication.common.exception;
+package com.continental.blogapplication.blogmanagement.exception;
 
 import com.continental.blogapplication.common.response.SpringApiResponse;
 import lombok.AllArgsConstructor;
@@ -9,20 +9,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Data
 @AllArgsConstructor
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class PhotoNotFoundException {
+public class PhotoNotFoundException  extends RuntimeException{
     private static final long serialVersionUID = 1L;
 
     private transient SpringApiResponse apiResponse;
 
+    private Integer photoId;
     private String photoTitle;
-    private String fieldName;
-    private Object fieldValue;
 
+    public PhotoNotFoundException(Integer photoId){
+        super();
+        this.photoId = photoId;
+    }
 
     private void setApiResponse() {
-        String message = String.format("%s not found for- %s: '%s'", photoTitle, fieldName, fieldValue);
+        String message = String.format("Photo id - %s not found'", photoId);
 
         apiResponse = new SpringApiResponse(Boolean.FALSE, message);
+    }
+    public SpringApiResponse getApiResponse() {
+        return apiResponse;
     }
 
 }

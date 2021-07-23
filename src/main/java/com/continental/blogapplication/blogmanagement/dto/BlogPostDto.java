@@ -21,6 +21,6 @@ public class BlogPostDto {
 
     private String username;
 
-    private List<PhotoDto> photourls;
+    private List<PhotoDto> photos;
 
 }

@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -29,8 +29,17 @@ public class PostEntity {
     @Column(name = "body")
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(cascade =CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName ="id")
     private UsersEntity usersEntity;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL, orphanRemoval = true)
+    private List<PhotoEntity> photo= new ArrayList<>();
+
+    @Column(name = "created_at")
+    private Instant createdAt;
+
+    @Column(name = "updated_at")
+    private Instant updatedAt;
 
 }

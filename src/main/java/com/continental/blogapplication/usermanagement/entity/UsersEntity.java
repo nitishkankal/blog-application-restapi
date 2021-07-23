@@ -1,15 +1,15 @@
 package com.continental.blogapplication.usermanagement.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.continental.blogapplication.blogmanagement.entity.PostEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -41,6 +41,19 @@ public class UsersEntity {
 
     @Column(name = "phone")
     private String phone;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usersEntity")
+    private List<PostEntity> postEntities = new ArrayList<>();
+
+    public List<PostEntity> getPostEntities() {
+        return postEntities;
+    }
+
+    public void setPostEntities(List<PostEntity> postEntities) {
+        this.postEntities = postEntities;
+    }
+
 
 
 }

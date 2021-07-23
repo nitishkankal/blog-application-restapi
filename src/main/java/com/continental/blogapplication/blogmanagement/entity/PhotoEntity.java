@@ -1,5 +1,6 @@
 package com.continental.blogapplication.blogmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "photos")
 public class PhotoEntity {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "title")
@@ -24,10 +25,14 @@ public class PhotoEntity {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "thumbnail_url")
-    private String thumbnailUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_photos_id")
+    @JoinColumn(name = "post_photos_id", referencedColumnName ="id")
     private PostEntity postEntity;
+
+    @JsonIgnore
+    public PostEntity getPostEntity() {
+        return postEntity;
+    }
+
 }
